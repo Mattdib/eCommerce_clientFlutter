@@ -31,7 +31,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
       ),
       body: Column(
         children: [
-          //listview of Product details
+          //listview of Product details:
           Expanded(
             child: ListView(
               children: [
@@ -93,7 +93,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
             )
           ),
 
-          //price+quantity+add to cart
+          //price + quantity + add to cart Button:
           Container(
             color: Theme.of(context).colorScheme.primary,
             child: Padding(
@@ -205,7 +205,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
         builder: (context) => AlertDialog(
             surfaceTintColor: Theme.of(context).colorScheme.primary,
             content: Text("Add to Cart Successfully!",
-              style: GoogleFonts.dmSerifDisplay(fontWeight: FontWeight.bold)
+              style: GoogleFonts.dmSerifDisplay(
+                fontWeight: FontWeight.bold,
+                fontSize: 15
+              )
             ),
           actions: [
             IconButton(onPressed: (){

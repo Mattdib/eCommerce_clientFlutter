@@ -1,34 +1,37 @@
 import 'dart:collection';
 
+import 'package:app_progetto/models/productInCart.dart';
 import 'package:flutter/material.dart';
 
 import 'Product.dart';
 
 class cartList extends ChangeNotifier{
 
-  final LinkedHashMap _cartList =  LinkedHashMap<Product, int>(); //Non Lavora sugli indici ma sulle CHIAVI!
+  List<ProductInCart> _cartList= [];
 
   //Getter:
-  LinkedHashMap get getCart => _cartList;
+  List<ProductInCart> get getCart => _cartList;
 
   //add to cart:
   void addCart(Product product, int quantity){
-    _cartList[product]=quantity;
-    notifyListeners();
+      _cartList.add(ProductInCart(id: product.id, quantity: quantity, name: product.name, price: product.price));
+      notifyListeners();
   }
 
   //remove from cart:
-  void removeCart(Product product){
+  void removeCart(ProductInCart product){
     _cartList.remove(product);
     notifyListeners();
   }
 
   @override
-  String toString() {
-    LinkedHashMap list= LinkedHashMap<String, int>();
-    _cartList.forEach((Product , int){
-      list[Product.name]=int;
-    });
+  String stampaLista() {
+    List<String> list= [];
+    for(int i=0; i<_cartList.length; i++){
+      String name= _cartList[i].name;
+      String quantity= _cartList[i].quantity.toString();
+      list.add("{ "+name+" : "+quantity+" }");
+    }
     return list.toString();
   }
 

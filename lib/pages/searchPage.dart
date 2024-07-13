@@ -19,7 +19,7 @@ class _SearchState extends State<SearchPage> {
   bool _searching = false;
   List<Product>? _products; //lista prodotti restituita da una richiesta al webServer
 
-  TextEditingController _searchFiledController = TextEditingController(); //Controller per l'accesso all'area di teso
+  final TextEditingController _searchFiledController = TextEditingController(); //Controller per l'accesso all'area di teso
 
 
   @override
@@ -51,7 +51,7 @@ class _SearchState extends State<SearchPage> {
         children: [
           Flexible(
             child: InputField(  //creo un campo di testo
-              labelText: "Search",
+              labelText: "Name of the product:",
               controller: _searchFiledController,
               onSubmit: (value) {
                _search();
@@ -77,7 +77,11 @@ class _SearchState extends State<SearchPage> {
                   _products!.length == 0 ? //.....SONO CERTO CHE la lista dei prodotti NON E' NULLA (lo indico con "!") e se la sua dimensione è 0 (0 e null NON SONO LA STESSA COSA)
                   noResults() : //restituiscimi una stringa che visualizzo a schermo che indica che ciò che è stato ricercato non c'è, altrimenti.....
                   yesResults() : //.....restituiscimi la lista dei prodotti che rispettano la ricerca che è stata fatta.
-    const CircularProgressIndicator(); //altrimenti mi fa visualizzare l'icona che mi indica che sta ancora attendendo la risposta dal webServer
+    Center(
+      child: Container(
+          color: Colors.transparent,
+          child: const CircularProgressIndicator()),
+    ); //altrimenti mi fa visualizzare l'icona che mi indica che sta ancora attendendo la risposta dal webServer
   }
 
   Widget noResults() {

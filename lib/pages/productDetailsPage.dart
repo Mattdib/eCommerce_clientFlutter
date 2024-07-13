@@ -35,9 +35,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
           Expanded(
             child: ListView(
               children: [
-                //Image:
+
+                //Image of the Product:
                 Padding(
-                  padding: const EdgeInsets.all(40),
+                  padding: const EdgeInsets.all(40), //Icremento la distanza tra i bordi dell'immagine e quelli della finestra/Scaffold
                   child: Container(
                       height: 300,
                       width: double.infinity,
@@ -155,17 +156,24 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
                         ],
                       )
                     ],
+
                   ),
 
                   const SizedBox(height: 25),
 
-                  //add to cart Button:
-                  Button(onTap: addCart,
-                      color: Colors.grey.shade800,
-                      child: Text("add to Cart", style: GoogleFonts.dmSerifDisplay(fontSize: 20,
-                          fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary)
-                      )
-                  )
+                  //AddToCart floating Button:
+                  Center(
+                    child: FloatingActionButton.extended(
+                      onPressed: addCart, //TODO: make a purchase request to the webServer
+                      backgroundColor: Colors.grey.shade800,
+                      label: Text("Add to Cart",
+                          style: GoogleFonts.dmSerifDisplay(fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 25)
+                      ),
+                    ),
+                  ),
+
                 ],
               ),
             ),
@@ -199,21 +207,25 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
     if(quantity > 0){
       final cart = context.read<cartList>();
       cart.addCart(widget.product, quantity);
-      print(cart.toString());
+      //piccolo test per verificare che i prodotti vengano iseriti nella listaProdotti del carrello:
+      print("Lista prodotti nel carrello: ");
+      print(cart.stampaLista());
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
             surfaceTintColor: Theme.of(context).colorScheme.primary,
-            content: Text("Add to Cart Successfully!",
+            content: Text("Add to Cart Successfully !",
               style: GoogleFonts.dmSerifDisplay(
                 fontWeight: FontWeight.bold,
-                fontSize: 15
+                fontSize: 20
               )
             ),
           actions: [
-            IconButton(onPressed: (){
-              Navigator.pop(context); //mi permette di ritornare alla pagina precedente di dettagli del prodotto
-              Navigator.pop(context); //....eseguendolo due volte ritorno alla schermata principale (ShopPage oppure SearchPage)
+            IconButton(
+                color: Colors.blue,
+                onPressed: (){
+                  Navigator.pop(context); //mi permette di ritornare alla pagina precedente di dettagli del prodotto
+                  Navigator.pop(context); //....eseguendolo due volte ritorno alla schermata principale (ShopPage oppure SearchPage)
             },
                 icon: const Icon(Icons.check_rounded))
           ],

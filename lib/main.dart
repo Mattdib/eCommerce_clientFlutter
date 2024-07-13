@@ -1,12 +1,19 @@
+import 'package:app_progetto/models/cartList.dart';
 import 'package:app_progetto/pages/cartPage.dart';
 import 'package:app_progetto/pages/homePage.dart';
 import 'package:app_progetto/pages/searchPage.dart';
 import 'package:app_progetto/pages/shopPage.dart';
 import 'package:app_progetto/themes/light_mode.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+      ChangeNotifierProvider(
+          create: (context) => cartList(),
+          child: const MyApp()
+      )
+  );
 }
 
 //classe radice della mia applicazione

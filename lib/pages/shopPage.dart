@@ -18,6 +18,9 @@ class ShopPage extends StatefulWidget {
 }
 
 class ShopState extends State<ShopPage>{
+
+  //State parameter:
+
   bool searching = false;
   //Lista di prova in attesa di sistemare la ricerca dei prodotti tramite API REST:
   List<Product>? products = [

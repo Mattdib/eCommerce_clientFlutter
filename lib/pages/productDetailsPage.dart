@@ -1,8 +1,12 @@
+import 'dart:js_interop';
+
 import 'package:app_progetto/components/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../models/Product.dart';
+import '../models/cartList.dart';
 
 class ProductDetailsPage extends StatefulWidget{
   final Product product;
@@ -13,12 +17,15 @@ class ProductDetailsPage extends StatefulWidget{
 }
 
 class _ProductDetailsPageState extends State<ProductDetailsPage>{
-  int quantity=0;
+  //State parameter:
+
+  int quantity=0; //quantità di prodotto che si vuole acquistare
 
   //FrontEnd:
 
   @override
   Widget build(BuildContext context) {
+    final cart = context.read<cartList>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -156,7 +163,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
                   const SizedBox(height: 25),
 
                   //add to cart Button:
-                  Button(onTap: addCart(),
+                  Button(onTap: addCart,
                       color: Colors.grey.shade800,
                       child: Text("add to Cart", style: GoogleFonts.dmSerifDisplay(fontSize: 20,
                           fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary)
@@ -192,6 +199,27 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
   }
 
   addCart(){
+    if(quantity > 0){
+      final cart = context.read<cartList>();
+      cart.addCart(widget.product, quantity);
+      print(cart.toString());
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+            surfaceTintColor: Theme.of(context).colorScheme.primary,
+            content: Text("Add to Cart Successfully!",
+              style: GoogleFonts.dmSerifDisplay(fontWeight: FontWeight.bold)
+            ),
+          actions: [
+            IconButton(onPressed: (){
+              Navigator.pop(context); //mi permette di ritornare alla pagina precedente di dettagli del prodotto
+              Navigator.pop(context); //....eseguendolo due volte ritorno alla schermata principale (ShopPage oppure SearchPage)
+            },
+                icon: const Icon(Icons.check_rounded))
+          ],
+        ),
+      );
+    }
   }
 
 }//productDetailsPage

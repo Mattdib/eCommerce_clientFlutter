@@ -1,7 +1,6 @@
-import 'package:app_progetto/models/cartList.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+
 
 import '../components/my_drawer.dart';
 

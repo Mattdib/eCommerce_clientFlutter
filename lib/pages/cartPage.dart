@@ -4,13 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../components/my_drawer.dart';
-import '../models/Product.dart';
-import '../models/cartList.dart';
 
 class CartPage extends StatefulWidget{
 
   const CartPage({super.key});
 
+  @override
   State<CartPage> createState() => CartState();
 }
 
@@ -18,7 +17,6 @@ class CartState extends State<CartPage>{
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<cartList>(context);
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,

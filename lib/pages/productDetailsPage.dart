@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:app_progetto/components/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +23,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
 
   @override
   Widget build(BuildContext context) {
-    final cart = context.read<cartList>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

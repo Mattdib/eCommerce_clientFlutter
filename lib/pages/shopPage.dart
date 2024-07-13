@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../components/my_productCard.dart';
 import '../models/Product.dart';
-import '../models/model.dart';
 import '../support/constants.dart';
 
 class ShopPage extends StatefulWidget {

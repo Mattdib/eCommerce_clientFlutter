@@ -19,7 +19,7 @@ class MyDrawer extends StatelessWidget{
           fontSize: 25)
           ),
           //shop tile:
-          new MyListTile(text: "Home", icon: Icons.home,onTap: () => Navigator.pushNamed(context, '/shopPage')),
+          new MyListTile(text: "Shop Page", icon: Icons.home,onTap: () => Navigator.pushNamed(context, '/shopPage')),
 
           //search tile:
           new MyListTile(text: "Search", icon: Icons.search_rounded, onTap: () => Navigator.pushNamed(context, '/searchPage')),

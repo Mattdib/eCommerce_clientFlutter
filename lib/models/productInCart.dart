@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class ProductInCart {
   final int id;
@@ -9,7 +8,7 @@ class ProductInCart {
   const ProductInCart({required this.id, required this.quantity, required this.name, required this.price});
 
   Map<String, dynamic> toJson() => {
-    'prodotto' : { 'id': id },
+    'prodotto' : { 'id' : id } ,
     'quantitaAcquistata': quantity,
   };
 

@@ -1,6 +1,7 @@
 import 'package:app_progetto/models/cartList.dart';
 import 'package:app_progetto/pages/cartPage.dart';
 import 'package:app_progetto/pages/homePage.dart';
+import 'package:app_progetto/pages/purchasePage.dart';
 import 'package:app_progetto/pages/searchPage.dart';
 import 'package:app_progetto/pages/shopPage.dart';
 import 'package:app_progetto/themes/light_mode.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/shopPage':(context) => const ShopPage(),
         '/cartPage':(context) => const CartPage(),
         '/searchPage':(context) => SearchPage(),
+        '/purchasePage':(context) => PurchasePage(),
       },
     );
   }

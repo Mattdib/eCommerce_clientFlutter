@@ -58,7 +58,7 @@ class CartState extends State<CartPage>{
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {}, //TODO: make a purchase request to the webServer
+              onPressed: () => Navigator.pushNamed(context, '/purchasePage'),
               backgroundColor: Colors.red.shade800,
               label: Text("Buy Now !",
                 style: GoogleFonts.dmSerifDisplay(fontWeight: FontWeight.bold,
@@ -66,22 +66,17 @@ class CartState extends State<CartPage>{
                     fontSize: 25)
               ),
             ),
-
-
     );
   }
 
   //BackEnd:
- /*
+
   removeFromCart(ProductInCart product) {
     final cart= context.read<cartList>();
     cart.removeCart(product);
     print("Lista prodotti nel carrello: ");
     print(cart.stampaLista());
   }
-  */
-
-
 
 }//CartState
 

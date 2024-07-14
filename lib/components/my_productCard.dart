@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
         child: Container(
           height: 500,
           width: double.infinity,
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
             boxShadow: [ BoxShadow(
               color: Colors.grey.shade600,
               blurRadius: 10,
-              offset: Offset(0,10)
+              offset: const Offset(0,10)
              )
             ]
           ),

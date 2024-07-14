@@ -15,7 +15,7 @@ class cartList extends ChangeNotifier{
   //add to cart:
   void addCart(Product product, int quantity){
       _cartList.add(ProductInCart(id: product.id, quantity: quantity, name: product.name, price: product.price));
-      notifyListeners();
+      notifyListeners(); //Notifico tutti gli ascoltatori che lo stato della lista è cambiato.
   }
 
   //remove from cart:

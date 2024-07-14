@@ -16,7 +16,7 @@ void main() {
   );
 }
 
-//classe radice della mia applicazione
+//Widget radice della mia applicazione:
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

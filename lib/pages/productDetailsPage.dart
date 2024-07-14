@@ -1,4 +1,3 @@
-import 'package:app_progetto/components/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -164,7 +163,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
                   //AddToCart floating Button:
                   Center(
                     child: FloatingActionButton.extended(
-                      onPressed: addCart, //TODO: make a purchase request to the webServer
+                      onPressed: addCart,
                       backgroundColor: Colors.grey.shade800,
                       label: Text("Add to Cart",
                           style: GoogleFonts.dmSerifDisplay(fontWeight: FontWeight.bold,

@@ -6,17 +6,9 @@ import 'package:provider/provider.dart';
 import '../components/my_drawer.dart';
 
 
-class CartPage extends StatefulWidget{
+class CartPage extends StatelessWidget{
 
   const CartPage({super.key});
-
-  @override
-  State<CartPage> createState() => CartState();
-}
-
-class CartState extends State<CartPage>{
-
-  //FrontEnd:
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +42,37 @@ class CartState extends State<CartPage>{
                       subtitle: Text("Price: "+price+"\$"+"  "+"Qta: "+quantity),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete_rounded),
-                        onPressed: (){}, //TODO: throw an error when I invoke removeFromCart method
+                        onPressed: (){
+                          cart.removeCart(product);
+                          print("Lista prodotti nel carrello: ");
+                          print(cart.stampaLista());
+                          Navigator.pushNamed(context, '/cartPage');
+                        },
                       ),
                     ),
                   );
                 } // ItemBuilder
             ),
+            //Buy Now Button:
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () => Navigator.pushNamed(context, '/purchasePage'),
+              onPressed: () {
+                if(cart.getCart.isEmpty){ showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    surfaceTintColor: Theme.of(context).colorScheme.primary,
+                    content: Text("Empty Cart!",
+                        style: GoogleFonts.dmSerifDisplay(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20
+                        )
+                    ),
+                  ),
+                );
+                } else {
+                  Navigator.pushNamed(context, '/purchasePage');
+                }
+              }, //onPressed
               backgroundColor: Colors.red.shade800,
               label: Text("Buy Now !",
                 style: GoogleFonts.dmSerifDisplay(fontWeight: FontWeight.bold,
@@ -67,15 +81,6 @@ class CartState extends State<CartPage>{
               ),
             ),
     );
-  }
-
-  //BackEnd:
-
-  removeFromCart(ProductInCart product) {
-    final cart= context.read<cartList>();
-    cart.removeCart(product);
-    print("Lista prodotti nel carrello: ");
-    print(cart.stampaLista());
   }
 
 }//CartState

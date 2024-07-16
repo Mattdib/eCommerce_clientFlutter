@@ -26,6 +26,19 @@ class Model {
     }
   }
 
+  Future<List<Product>?>? advancedSearch([Map<String, String>? value]) async { //il metodo resistiusce IN FUTURO (ossia all'arrivo della risposta da parte del webServer) un oggetto List<Prodotto>
+    try {
+      List<Product> result = List<Product>.from(json.decode(await restManager.makeGetRequest( Constants.ADDRESS_STORE_SERVER,
+          Constants.REQUEST_ADVANCED_SEARCH, value)).map((i) => Product.fromJson(i)).toList());
+      print("Lista prodotti restituita dal webServer:");
+      print(result.toString());
+      return result;
+    }
+    catch (e) {
+      return null; // not the best solution
+    }
+  }
+
   Future<List<Product>?>? searchProductShopPage() async {
     //il metodo resistiusce IN FUTURO (ossia all'arrivo della risposta da parte del webServer) un oggetto List<Prodotto>
     Map<String, String> params = Map();

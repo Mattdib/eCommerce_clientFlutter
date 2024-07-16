@@ -1,13 +1,11 @@
 import 'package:app_progetto/components/my_drawer.dart';
 import 'package:app_progetto/pages/productDetailsPage.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../components/my_productCard.dart';
 import '../models/Product.dart';
 import '../models/model.dart';
-import '../support/constants.dart';
 
 class ShopPage extends StatefulWidget {
 
@@ -22,15 +20,19 @@ class ShopState extends State<ShopPage>{
   //State parameter:
 
   bool _searching = false;
-  List<Product>? products = [];
+  List<Product>? products;
 
+  @override
+  void initState() {
+    super.initState();
+    search();
+  }
 
 
   //FrontEnd:
 
   @override
   Widget build(BuildContext context) {
-    search();
     return Scaffold(
         appBar: AppBar(
            centerTitle: true,
@@ -57,46 +59,38 @@ class ShopState extends State<ShopPage>{
   }
 
   Widget yesResults(){
-    return ListView.builder(
-      itemCount: products!.length,
-      itemBuilder: (context, index){
-        return ProductCard(
-          product: products![index],
-          onTap: () => navigateToProductPage(index),
-        );
-      },
-    );
+      return  ListView.builder(
+        itemCount: products!.length,
+        itemBuilder: (context, index){
+          return ProductCard(
+            product: products![index],
+            onTap: () => navigateToProductPage(index),
+          );
+        },
+      );
   }
 
 
 //BackEnd:
 
   //ricerco la lista dei prodotti da visualizzare nella shopPage (chimata al webServer che mi restituisce una lista di prodotti)
-  //TODO: sistemare chiamate asincrone a REST API (CONSOLE ERROR: DioException [connection error]: The connection errored: The XMLHttpRequest onError callback was called. This typically indicates an error on the network layer.)
-  void search() async {
-    final Dio dio = new Dio();
-    try {
-      setState(() {
-        _searching = true;
-        products = null;
-      });
-      var result = await dio.get(Constants.REQUEST_SHOP_PAGE);
-      //DEBUG
-      print(result.statusCode);
-      print(result.data);
-      var resultData= result.data as List;
+  void search() {
+    setState(() {
+      _searching = true;
+      products = null;
+    });
+    Model.sharedInstance.searchProductShopPage()?.then((product) {
       setState(() {
         _searching = false;
-        products = resultData.map((e) => Product.fromJson(e)).toList();
+        products = product;
       });
-    }on DioException catch (e){
-      print(e);
-    }
+    });
   }
 
 
-
   Widget bottom() {
+    //print("invocato il metodo search: ");
+    //search();
     return  !_searching ?
     products == null ? //Se ha smesso di ricercare e la lista dei prodotti E' NULL.....
     const SizedBox.shrink() : //.....allora crea un box il più piccolo possibile, altrimenti.....
@@ -117,62 +111,3 @@ class ShopState extends State<ShopPage>{
   }
 
 } //ShopPage
-
-/*
-
-List<Product>? products = [
-  Product(id: 1,
-      name: "product1",
-      barcode: "ABDCF1",
-      description: "scarpa running corsa rossa molto comoda e ottima per lunghe corse o camminate.",
-      quantity: 15,
-      price: 20,
-      imagePath: "assets/scarpa1.jpg"),
-  Product(id: 2,
-      name: "product2",
-      barcode: "ABDCF2",
-      description: "scarpa gialla comoda per uscite all'aperto. Si abbina con ogni tipo di indumento.",
-      quantity: 25,
-      price: 35,
-      imagePath: "assets/scarpa2.jpg"),
-  Product(id: 3,
-      name: "product3",
-      barcode: "ABDCF3",
-      description: "scarpa rosa per donna ottima per fare sport o camminte in compagnia di amici.",
-      quantity: 27,
-      price: 40,
-      imagePath: "assets/scarpa3.jpg"),
-  Product(id: 4,
-      name: "product4",
-      barcode: "ABDCF4",
-      description: "AirMax scarpa per donna, molto comoda e ottima in qualsiasi contesto.",
-      quantity: 20,
-      price: 45,
-      imagePath: "assets/scarpa4.jpg"),
-  Product(id: 5,
-      name: "product5",
-      barcode: "ABDCF5",
-      description: "scarpe sportive uomo colore nero, molto comode per uso sportivo indoor e outdoor.",
-      quantity: 18,
-      price: 50,
-      imagePath: "assets/scarpa5.jpg")
-
-];
-
-
-//ricerco la lista dei prodotti da visualizzare nella shopPage (chimata al webServer che mi restituisce una lista di prodotti)
-  void search() {
-    setState(() {
-      searching = true;
-      products = null;
-    });
-    Model.sharedInstance.searchProductShopPage()?.then((product) {
-      setState(() {
-        searching = false;
-        products = product;
-      });
-    });
-  }
-
- */
-

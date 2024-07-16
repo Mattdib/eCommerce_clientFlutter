@@ -24,6 +24,9 @@ class MyDrawer extends StatelessWidget{
           //search tile:
           new MyListTile(text: "Search", icon: Icons.search_rounded, onTap: () => Navigator.pushNamed(context, '/searchPage')),
 
+          //advanced Search
+          new MyListTile(text: "Advanced Search", icon: Icons.manage_search_rounded, onTap: () => Navigator.pushNamed(context, '/advancedSearch')),
+
           //cart tile:
           new MyListTile(text: "Cart", icon: Icons.shopping_bag_rounded, onTap: () => Navigator.pushNamed(context, '/cartPage')),
 

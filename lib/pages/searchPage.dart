@@ -46,6 +46,7 @@ class _SearchState extends State<SearchPage> {
         onPressed: () => Navigator.pushNamed(context, '/cartPage'),
         child: Icon(Icons.shopping_bag_rounded, color: Colors.grey.shade800),
       ),
+
     );
   }
 

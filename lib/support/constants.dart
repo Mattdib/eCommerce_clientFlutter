@@ -22,7 +22,7 @@ class Constants {
   static final String REQUEST_ADD_USER = "/utente";
   static final String REQUEST_ADD_PURCHASE = "/acquisti";
 
-  static final String REQUEST_SHOP_PAGE = "localhost:8080/prodotti/listaProdPaginata?numeroPagina=0&dimPagina=10&ordinaPer=id";
+  static final String REQUEST_SHOP_PAGE = "/prodotti/listaProdPaginata";
 
   // states
   static final String STATE_CLUB = "club";

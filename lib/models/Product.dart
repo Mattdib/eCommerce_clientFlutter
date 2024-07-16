@@ -19,12 +19,12 @@ class Product{
   factory Product.fromJson(Map<String, dynamic> json) { //"dynamic" identifica un tipo generico (T in java)
     return Product(
       id: json['id'],
-      name: json['name'],
+      name: json['nome'],
       barcode: json['barCode'],
-      price: json['price'],
-      description: json['description'],
+      description: json['descrizione'],
+      price: json['prezzo'],
+      quantity: json['quantita'],
       imagePath: json['imagePath'],
-      quantity: json['quantity']
     );
   }
 
@@ -34,8 +34,13 @@ class Product{
     'barCode': barcode,
     'descrizione': description,
     'prezzo': price,
-    'quantità': quantity,
+    'quantita': quantity,
     'imagePath': imagePath,
   };
+
+  @override
+  String toString() {
+    return ("{nome: "+name+", barcode: "+barcode+"}");
+  }
 
 }

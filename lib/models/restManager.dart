@@ -66,7 +66,7 @@ class RestManager {
           delegate!.errorNetworkOccurred(Constants.MESSAGE_CONNECTION_ERROR);
           errorOccurred = true;
         }
-        await Future.delayed(const Duration(seconds: 10), () => null); // not the best solution
+        await Future.delayed(const Duration(seconds: 15), () => null); // not the best solution
       }
     }
 

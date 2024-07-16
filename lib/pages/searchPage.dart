@@ -1,6 +1,5 @@
 import 'package:app_progetto/components/my_circularButton.dart';
 import 'package:app_progetto/pages/productDetailsPage.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,7 +8,6 @@ import '../components/my_inputField.dart';
 import '../components/my_productCard.dart';
 import '../models/model.dart';
 import '../models/Product.dart';
-import '../support/constants.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage() : super();
@@ -102,38 +100,37 @@ class _SearchState extends State<SearchPage> {
   }
 
   Widget yesResults() {
-    return ListView.builder(
-      itemCount: _products!.length,
-      itemBuilder: (context, index){
-        return ProductCard(
-          product: _products![index],
-          onTap: () => navigateToProductPage(index),
-        );
-      },
+    return Expanded(
+    child:  Container(
+      child: ListView.builder(
+        itemCount: _products!.length,
+        itemBuilder: (context, index){
+          return ProductCard(
+            product: _products![index],
+            onTap: () => navigateToProductPage(index),
+          );
+        },
+      ),
+    ),
     );
   }
 
   //ricerco la lista dei prodotti da visualizzare nella shopPage (chimata al webServer che mi restituisce una lista di prodotti)
-  //TODO: sistemare chiamate asincrone a REST API (CONSOLE ERROR: DioException [connection error]: The connection errored: The XMLHttpRequest onError callback was called. This typically indicates an error on the network layer.)
-  void search() async {
-    final Dio dio = new Dio();
-    try {
-      setState(() {
-        _searching = true;
-        _products = null;
-      });
-      var result = await dio.get(Constants.REQUEST_SEARCH_PRODUCTS, queryParameters: {'name' : _searchFiledController.text});
-      //DEBUG
-      print(result.statusCode);
-      print(result.data);
-      var resultData= result.data as List;
-      setState(() {
+  void search() {
+    setState(() {
+      _searching = true; //imposto che sono in stato di ricerca
+      _products = null;  //lista dei prodotti ancora null
+    });
+    //Invoco il metodo searchProduct che invierà al webServer una richiesta di ottenere tutti i prodotti col nome
+    //indicato all'interno del "form" di ricerca (chiamata asincrona). Quando il metodo riceverà la risposta
+    //da parte del webserver (lista di prodotti), tramite il metodo .then(nomeOggettoOttenutoDalMetodo)
+    //non faccio altro che dire "dopo l'esecuzione del metodo esegui queste operazioni":
+    Model.sharedInstance.searchProduct(_searchFiledController.text)?.then((product) {
+      setState(() { //riaggirno lo stato della pagina impostando _searching a false (poichè è terminata) e assegnado a _products la lista di prodotti ottenuti dal metodo
         _searching = false;
-        _products = resultData.map((e) => Product.fromJson(e)).toList();
+        _products = product;
       });
-    }on DioException catch (e){
-      print(e);
-    }
+    });
   }
 
   void navigateToProductPage(int index){
@@ -141,24 +138,3 @@ class _SearchState extends State<SearchPage> {
   }
 
 }
-
-
-
-/*
-void _search() {
-  setState(() {
-    _searching = true; //imposto che sono in stato di ricerca
-    _products = null;  //lista dei prodotti ancora null
-  });
-  //Invoco il metodo searchProduct che invierà al webServer una richiesta di ottenere tutti i prodotti col nome
-  //indicato all'interno del "form" di ricerca (chiamata asincrona). Quando il metodo riceverà la risposta
-  //da parte del webserver (lista di prodotti), tramite il metodo .then(nomeOggettoOttenutoDalMetodo)
-  //non faccio altro che dire "dopo l'esecuzione del metodo esegui queste operazioni":
-  Model.sharedInstance.searchProduct(_searchFiledController.text)?.then((product) {
-    setState(() { //riaggirno lo stato della pagina impostando _searching a false (poichè è terminata) e assegnado a _products la lista di prodotti ottenuti dal metodo
-      _searching = false;
-      _products = product;
-    });
-  });
-}
- */

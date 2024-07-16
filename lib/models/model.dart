@@ -15,8 +15,11 @@ class Model {
     Map<String, String> params = Map();
     params["name"] = name;
     try {
-      return List<Product>.from(json.decode(await restManager.makeGetRequest( Constants.ADDRESS_STORE_SERVER,
+      List<Product> result = List<Product>.from(json.decode(await restManager.makeGetRequest( Constants.ADDRESS_STORE_SERVER,
           Constants.REQUEST_SEARCH_PRODUCTS, params)).map((i) => Product.fromJson(i)).toList());
+      print("Lista prodotti restituita dal webServer:");
+      print(result.toString());
+      return result;
     }
     catch (e) {
       return null; // not the best solution
@@ -25,10 +28,16 @@ class Model {
 
   Future<List<Product>?>? searchProductShopPage() async {
     //il metodo resistiusce IN FUTURO (ossia all'arrivo della risposta da parte del webServer) un oggetto List<Prodotto>
+    Map<String, String> params = Map();
+    params["numeroPagina"] = "0";
+    params["dimPagina"] = "5";
+    params["ordinaPer"] = "id";
     try {
-      return List<Product>.from(json.decode(
-          await restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER,
-              Constants.REQUEST_SHOP_PAGE)).map((i) => Product.fromJson(i)).toList());
+      List<Product> result = List<Product>.from(json.decode(await restManager.makeGetRequest(Constants.ADDRESS_STORE_SERVER,
+              Constants.REQUEST_SHOP_PAGE, params)).map((i) => Product.fromJson(i)).toList());
+      print("Lista prodotti restituita dal webServer:");
+      print(result.toString());
+      return result;
     }
     catch (e) {
       return null; // not the best solution

@@ -203,7 +203,31 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>{
   }
 
   addCart(){
-    if(quantity > 0){
+    if(widget.product.quantity==0){
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          surfaceTintColor: Theme.of(context).colorScheme.primary,
+          content: Text("Product Not Available !",
+              style: GoogleFonts.dmSerifDisplay(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red.shade800,
+                  fontSize: 20
+              )
+          ),
+          actions: [
+            IconButton(
+                color: Colors.blue,
+                onPressed: (){
+                  Navigator.pop(context); //mi permette di ritornare alla pagina precedente di dettagli del prodotto
+                  Navigator.pop(context); //....eseguendolo due volte ritorno alla schermata principale (ShopPage oppure SearchPage)
+                },
+                icon: const Icon(Icons.arrow_back))
+          ],
+        ),
+      );
+    }
+    else if (quantity > 0){
       final cart = context.read<cartList>();
       cart.addCart(widget.product, quantity);
       //piccolo test per verificare che i prodotti vengano iseriti nella listaProdotti del carrello:

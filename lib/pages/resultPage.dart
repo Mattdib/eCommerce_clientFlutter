@@ -120,6 +120,9 @@ class ResultState extends State<ResultPage>{
     if(form.max != null && form.max != ""){
       result["prezzomax"] = form.max!;
     }
+    if(form.type != "0"){
+      result["type"] = form.type!;
+    }
     print("info trasmesse al Server:");
     print(result.toString());
     return result;

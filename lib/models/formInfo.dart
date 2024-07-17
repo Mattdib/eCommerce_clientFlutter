@@ -5,6 +5,7 @@ class FormInfo extends ChangeNotifier{
   String? description;
   String? min;
   String? max;
+  String? type;
 
   void setName(String nome){
     this.name=nome;
@@ -23,6 +24,11 @@ class FormInfo extends ChangeNotifier{
 
   void setmax(String max){
     this.max=max;
+    notifyListeners();
+  }
+
+  void setType(String type){
+    this.type=type;
     notifyListeners();
   }
 

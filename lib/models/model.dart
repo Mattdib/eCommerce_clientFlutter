@@ -22,7 +22,7 @@ class Model {
       return result;
     }
     catch (e) {
-      return null; // not the best solution
+      return null; 
     }
   }
 
@@ -35,7 +35,18 @@ class Model {
       return result;
     }
     catch (e) {
-      return null; // not the best solution
+      return null; 
+    }
+  }
+
+  Future<String?>? addPurchase([Map<String, String>? value, dynamic body]) async { //il metodo resistiusce IN FUTURO (ossia all'arrivo della risposta da parte del webServer) un oggetto List<Prodotto>
+    try {
+      String result = (json.decode(await restManager.makePostRequest(Constants.ADDRESS_STORE_SERVER, Constants.REQUEST_ADD_PURCHASE, value, body)) as String);
+      print(result);
+      return result;
+    }
+    catch (e) {
+      return null;
     }
   }
 
@@ -53,7 +64,7 @@ class Model {
       return result;
     }
     catch (e) {
-      return null; // not the best solution
+      return null; 
     }
   }
 

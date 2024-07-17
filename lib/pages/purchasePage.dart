@@ -1,12 +1,9 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../models/cartList.dart';
-import '../support/constants.dart';
+import '../models/model.dart';
 
 class PurchasePage extends StatefulWidget{
    PurchasePage({super.key});
@@ -109,22 +106,18 @@ class PurchaseState extends State<PurchasePage>{
   }
 
   void search() async {
-    final cart = context.read<cartList>();
-    var json = jsonEncode(cart.getCart);
-    print("JSON trasmesso:");
-    print(json);
-    final Dio dio = new Dio();
-    try {
-      setState(() {
-        verifing = true;
-      });
-      result = (await dio.post(Constants.REQUEST_ADD_PURCHASE, queryParameters: {'idUtente' : 1} , data: json )) as String;
+    final cart= context.read<cartList>();
+    Map<String, String>? map = Map();
+    map["idUtente"] = "1";
+    setState(() {
+      verifing = true;
+    });
+    Model.sharedInstance.addPurchase(map, cart.getCart)?.then((responce) {
       setState(() {
         verifing = false;
+        result = responce!;
       });
-    }on DioException catch (e){
-      print(e);
-    }
+    });
   }
 
 }

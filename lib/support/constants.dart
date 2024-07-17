@@ -5,18 +5,7 @@ class Constants {
 
   // addresses
   static final String ADDRESS_STORE_SERVER = "localhost:8080";
-  //static final String ADDRESS_AUTHENTICATION_SERVER = "***";
 
-  /*
-  // authentication
-  static final String REALM = "***";
-  static final String CLIENT_ID = "***";
-  static final String CLIENT_SECRET = "***";
-  static final String REQUEST_LOGIN = "/auth/realms/" + REALM + "/protocol/openid-connect/token";
-  static final String REQUEST_LOGOUT = "/auth/realms/" + REALM + "/protocol/openid-connect/logout";
-*/
-
-  //TODO: aggiornare URI id accesso ai servizi REST del webServer
   // requests
   static final String REQUEST_SEARCH_PRODUCTS = "/prodotti/ricercaPerNome";
   static final String REQUEST_ADD_USER = "/utente";

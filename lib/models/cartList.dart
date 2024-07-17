@@ -24,7 +24,7 @@ class cartList extends ChangeNotifier{
     notifyListeners();
   }
 
-  @override
+
   String stampaLista() {
     List<String> list= [];
     for(int i=0; i<_cartList.length; i++){

@@ -72,8 +72,8 @@ class RestManager {
 
   }
 
-  Future<String> makePostRequest(String serverAddress, String servicePath, dynamic value) async {
-    return _makeRequest(serverAddress, servicePath, "post",  body: value);
+  Future<String> makePostRequest(String serverAddress, String servicePath, [Map<String, String>? value, dynamic body]) async {
+    return _makeRequest(serverAddress, servicePath, "post", value: value,  body: body);
   }
 
   Future<String> makeGetRequest(String serverAddress, String servicePath, [Map<String, String>? value]) async {

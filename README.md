@@ -1,10 +1,10 @@
-# 📱 eCommerce Client — Flutter
+# - eCommerce Client — Flutter
 
 Applicazione mobile/multipiattaforma sviluppata con **Flutter** che funge da client per il backend [eCommerce_WebServerSpring](https://github.com/Mattdib/eCommerce_WebServerSpring). Permette di sfogliare il catalogo prodotti, effettuare ricerche avanzate, gestire il carrello e completare acquisti tramite chiamate REST.
 
 ***
 
-## 🚀 Tecnologie
+## - Tecnologie
 
 | Dipendenza | Versione | Utilizzo |
 |---|---|---|
@@ -49,9 +49,9 @@ lib/
 
 ***
 
-## 🖥️ Schermate
+## - Descrizione delle pagine
 
-| Schermata | Descrizione |
+| Pagina | Descrizione |
 |---|---|
 | `HomePage` | Pagina principale dell'app |
 | `ShopPage` | Catalogo prodotti con lista paginata |
@@ -64,7 +64,7 @@ lib/
 
 ***
 
-## 🔗 Connessione al backend
+## - Connessione al backend
 
 L'app comunica con il backend Spring Boot tramite la classe `RestManager`, che gestisce le chiamate HTTP (GET, POST, PUT, DELETE) in JSON. Il server di destinazione è configurato in `lib/support/constants.dart`:
 
@@ -76,7 +76,7 @@ static final String ADDRESS_STORE_SERVER = "localhost:8080";
 
 ***
 
-## ⚙️ Avvio del progetto
+## - Installazione e avvio del progetto
 
 **Prerequisiti:** Flutter SDK installato, backend [eCommerce_WebServerSpring](https://github.com/Mattdib/eCommerce_WebServerSpring) in esecuzione su `localhost:8080`.
 
@@ -96,11 +96,10 @@ flutter run
 
 ## 🗂️ Progetto correlato
 
-Il backend REST che alimenta questa app è disponibile nella repository:
-👉 [eCommerce_WebServerSpring](https://github.com/Mattdib/eCommerce_WebServerSpring)
+Il backend REST che alimenta questa app è disponibile nella repository: [eCommerce_WebServerSpring](https://github.com/Mattdib/eCommerce_WebServerSpring)
 
 ***
 
-## 👤 Autore
+## - Autore
 
 **Mattia** — [@Mattdib](https://github.com/Mattdib)
